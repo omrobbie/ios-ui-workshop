@@ -7,12 +7,14 @@
 
 import AsyncDisplayKit
 
-class ProductCardStarterViewController: ASDKViewController<ASDisplayNode> {
+class ProductCardStarterViewController: ASDKViewController<ASTableNode> {
     let model = sampleProducts
     
     override init() {
-        super.init(node: ASDisplayNode())
+        super.init(node: ASTableNode())
         node.backgroundColor = .white
+
+        node.dataSource = self
         
         navigationItem.setRightBarButton(UIBarButtonItem(title: "Expected", style: .plain, target: self, action: #selector(goToResultViewController)), animated: false)
     }
@@ -24,5 +26,16 @@ class ProductCardStarterViewController: ASDKViewController<ASDisplayNode> {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProductCardStarterViewController: ASTableDataSource {
+    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
+        model.count
+    }
+
+    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+        let data = model[indexPath.row]
+        return ProductCardNode(model: data)
     }
 }

@@ -7,7 +7,7 @@
 
 import AsyncDisplayKit
 
-class ProductCardNode: ASDisplayNode {
+class ProductCardNode: ASCellNode {
     let imageNode: ProductCardImageNode
     let productDescription: ProductCardDescriptionNode
 
