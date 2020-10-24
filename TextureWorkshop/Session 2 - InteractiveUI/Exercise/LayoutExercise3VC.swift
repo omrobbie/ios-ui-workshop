@@ -11,7 +11,9 @@ import AsyncDisplayKit
 internal class LayoutExercise3VC: ASDKViewController<ASDisplayNode> {
     
     // MARK: UI Elements
-    
+
+    let customNode = CustomNode()
+
     // MARK: Initialization
     
     internal override init() {
@@ -23,7 +25,9 @@ internal class LayoutExercise3VC: ASDKViewController<ASDisplayNode> {
             guard let self = self else { return ASLayoutSpec() }
             
             // edit here
-            return ASLayoutSpec()
+            return ASInsetLayoutSpec(
+                insets: UIEdgeInsets(top: 16, left: 16, bottom: .infinity, right: .infinity),
+                child: self.customNode)
         }
     }
     
