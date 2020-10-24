@@ -8,20 +8,17 @@
 import AsyncDisplayKit
 
 class ProductCardNode: ASDisplayNode {
-    let imageNode = ASNetworkImageNode()
-
+    let imageNode: ProductCardImageNode
     let productDescription: ProductCardDescriptionNode
 
     init(model: Product) {
+        imageNode = ProductCardImageNode(imageUrl: model.imageURL)
         productDescription = ProductCardDescriptionNode(description: model.description)
 
         super.init()
         automaticallyManagesSubnodes = true
         backgroundColor = .white
         setShadow()
-
-        imageNode.url = model.imageURL
-        imageNode.style.preferredSize = CGSize(width: 80, height: 80)
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
