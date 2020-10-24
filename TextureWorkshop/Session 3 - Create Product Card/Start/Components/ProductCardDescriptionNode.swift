@@ -12,9 +12,11 @@ class ProductCardDescriptionNode: ASDisplayNode {
     let priceNode = ASTextNode()
 
     let shopNode: ProductCardShopNode
+    let reviewNode: ProductCardReviewNode
 
     init(description: Product.Description) {
         shopNode = ProductCardShopNode(shop: description.shop)
+        reviewNode = ProductCardReviewNode(review: description.review)
 
         super.init()
         automaticallyManagesSubnodes = true
@@ -40,7 +42,7 @@ class ProductCardDescriptionNode: ASDisplayNode {
             spacing: 10,
             justifyContent: .start,
             alignItems: .start,
-            children: [nameNode, priceNode, shopNode]
+            children: [nameNode, priceNode, shopNode, reviewNode]
         )
     }
 }
