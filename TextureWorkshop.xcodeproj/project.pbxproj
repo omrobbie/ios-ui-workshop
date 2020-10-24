@@ -316,8 +316,8 @@
 			children = (
 				E50898692542F32B00E9646C /* CustomNode */,
 				E508986B2542F32B00E9646C /* LayoutExercise1VC.swift */,
-				E508986C2542F32B00E9646C /* LayoutExercise3VC.swift */,
 				E508986D2542F32B00E9646C /* LayoutExercise2VC.swift */,
+				E508986C2542F32B00E9646C /* LayoutExercise3VC.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";

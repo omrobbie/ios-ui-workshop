@@ -40,9 +40,24 @@ internal class LayoutExercise1VC: ASDKViewController<ASDisplayNode> {
         
         node.layoutSpecBlock = { [weak self] _, size -> ASLayoutSpec in
             guard let self = self else { return ASLayoutSpec() }
-            
-            // edit here
-            return ASLayoutSpec()
+
+            let descriptionStack = ASStackLayoutSpec(
+                direction: .vertical,
+                spacing: 8,
+                justifyContent: .start,
+                alignItems: .start,
+                children: [self.titleTextNode, self.subtitleTextNode])
+
+            let mainStack = ASStackLayoutSpec(
+                direction: .horizontal,
+                spacing: 8,
+                justifyContent: .start,
+                alignItems: .center,
+                children: [self.imageNode, descriptionStack])
+
+            return ASInsetLayoutSpec(
+                insets: UIEdgeInsets(top: 0, left: 0, bottom: .infinity, right: .infinity),
+                child: mainStack)
         }
     }
     
