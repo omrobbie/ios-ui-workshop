@@ -14,7 +14,8 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
 
         let subNode = ASDisplayNode()
         subNode.backgroundColor = .orange
-        subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//        subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        subNode.style.preferredSize = CGSize(width: 300, height: 300)
 
         node.addSubnode(subNode)
 
