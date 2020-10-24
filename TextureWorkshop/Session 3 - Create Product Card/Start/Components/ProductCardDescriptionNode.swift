@@ -13,10 +13,15 @@ class ProductCardDescriptionNode: ASDisplayNode {
 
     let shopNode: ProductCardShopNode
     let reviewNode: ProductCardReviewNode
+    let freeShippingNode: ASImageNode?
 
     init(description: Product.Description) {
         shopNode = ProductCardShopNode(shop: description.shop)
         reviewNode = ProductCardReviewNode(review: description.review)
+
+        freeShippingNode = description.isFreeShipping ? ASImageNode() : nil
+        freeShippingNode?.image = UIImage(named: "free_shipping")
+        freeShippingNode?.style.preferredSize = CGSize(width: 67, height: 16)
 
         super.init()
         automaticallyManagesSubnodes = true
@@ -42,7 +47,7 @@ class ProductCardDescriptionNode: ASDisplayNode {
             spacing: 10,
             justifyContent: .start,
             alignItems: .start,
-            children: [nameNode, priceNode, shopNode, reviewNode]
+            children: [nameNode, priceNode, shopNode, reviewNode, freeShippingNode].compactMap { $0 }
         )
     }
 }
