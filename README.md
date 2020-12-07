@@ -1,3 +1,5 @@
+![Banner Meetup](banner-meetup.jpg)
+
 [Session 1 - Basic in Texture](#session-1---basic-in-texture)
 
 [Session 2 - Layouting with LayoutSpec](#session-2---layouting-with-layoutspec-in-texture)
@@ -35,7 +37,7 @@ The file will look like this:
 import UIKit
 
 class BasicTextureViewController: UIViewController {
-   
+
 }
 ```
 The `BasicTextureViewController` still inherit the `UIViewController` so we need to change the subclass
@@ -50,7 +52,7 @@ import AsyncDisplayKit
 import UIKit
 
 class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
-   
+
 }
 ```
 Note: In the Create `Product Card List Session` we will configure the `root node` with a different type of `ASDisplayNode`
@@ -65,7 +67,7 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
     override init() {
         super.init()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -93,7 +95,7 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
 ```
 
 #### D. Add the rectangle box
-Now the fun part begins, we will create a rectangle box as the child of  `ViewController`. Create the box by initialize `ASDisplayNode()`.To make the box see clearly on the screen we can add some color and set the size of the box. 
+Now the fun part begins, we will create a rectangle box as the child of  `ViewController`. Create the box by initialize `ASDisplayNode()`.To make the box see clearly on the screen we can add some color and set the size of the box.
 
 For the size, we can use `frame` property for now and let's start by adding a simple size by adding `subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)`.
 
@@ -105,11 +107,11 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
     override init() {
         super.init(node: ASDisplayNode())
         node.backgroundColor = .white
-        
+
         let subNode = ASDisplayNode()
         subNode.backgroundColor = .orange
         subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        
+
         node.addSubnode(subNode)
     }
     ......
@@ -133,11 +135,11 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
     override init() {
         super.init(node: ASDisplayNode())
         node.backgroundColor = .white
-        
+
         let subNode = ASDisplayNode()
         subNode.backgroundColor = .orange
         subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        
+
         node.addSubnode(subNode)
         node.layoutSpecBlock = { _, _ in
             return ASCenterLayoutSpec(centeringOptions: .XY,
@@ -159,7 +161,7 @@ The result is not the same as we not expected, the child node covers the whole s
 
 #### F. Adjust box size by using `style.preferredSize`
 
-Why did the `child node` cover the whole screen? the answer is we haven't set the size yet. We already set the size before on `.frame` but because right now we are using `layoutSpecBlock` the `frame` value is no longer valid. The goal of `layoutSpecBlock` is to apply the `FlexBox` concept which means we don't need to calculate the position & size manually. So let's fix the size. 
+Why did the `child node` cover the whole screen? the answer is we haven't set the size yet. We already set the size before on `.frame` but because right now we are using `layoutSpecBlock` the `frame` value is no longer valid. The goal of `layoutSpecBlock` is to apply the `FlexBox` concept which means we don't need to calculate the position & size manually. So let's fix the size.
 By adding the `style.preferredSize`, we specified a constant size to our `child node`.
 
 ```swift
@@ -168,14 +170,14 @@ class BasicTextureViewController: ASDKViewController<ASDisplayNode> {
     override init() {
         super.init(node: ASDisplayNode())
         node.backgroundColor = .white
-        
+
         let subNode = ASDisplayNode()
         subNode.backgroundColor = .orange
         // Change this
         // subNode.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         // Into this
         subNode.style.preferredSize = CGSize(width: 300, height: 300)
-        
+
         node.addSubnode(subNode)
         node.layoutSpecBlock = { _, _ in
             return ASCenterLayoutSpec(centeringOptions: .XY,
@@ -276,7 +278,7 @@ This session shows how easy it is to update the UI of a `Texture` component.
 
 This session is covered in the folder labelled as `Session 3 - Create Product Card`
 
-Before we start, to have a better picture on what we are going to create, do the followings. 
+Before we start, to have a better picture on what we are going to create, do the followings.
 1. Run the project
 2. Tap on `Create Product Card`.
 3. Then, tap on `Expected`
@@ -306,7 +308,7 @@ Let's put product image, name and price first.
     ```swift
     imageNode.url = model.imageUrl
     imageNode.style.preferredSize = CGSize(width: 80, height: 80)
-    
+
     nameNode.attributedText = NSAttributedString(
         string: description.name,
         attributes: [
@@ -334,7 +336,7 @@ Let's put product image, name and price first.
             priceNode
         ]
     )
-    
+
     let mainStack = ASStackLayoutSpec(
         direction: .horizontal,
         spacing: 8,
@@ -345,12 +347,12 @@ Let's put product image, name and price first.
             verticalStack
         ]
     )
-    
+
     let mainInset = ASInsetLayoutSpec(
         insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
         child: mainStack
     )
-    
+
     return mainInset
     ```
 
@@ -372,7 +374,7 @@ override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec
             nameNode
         ]
     )
-    
+
     let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
         spacing: 10,
@@ -384,7 +386,7 @@ override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec
             shopNode
         ]
     )
-    
+
     let mainStack = ASStackLayoutSpec(
         direction: .horizontal,
         spacing: 8,
@@ -395,12 +397,12 @@ override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec
             verticalStack
         ]
     )
-    
+
     let mainInset = ASInsetLayoutSpec(
         insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
         child: mainStack
     )
-    
+
     return mainInset
 }
 ```
@@ -421,7 +423,7 @@ So, let's move the vertical stack
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .regular)
         ]
     )
-    
+
     priceNode.attributedText = NSAttributedString(
         string: description.price,
         attributes: [
@@ -481,7 +483,7 @@ Okay now, let's continue :).
     let nameNode = ASTextNode()
     ```
     You might notice the optional, what is that for? Well, remember that the badge can disappear?
-    
+
 3. Setup the nodes
     ```swift
     switch shop.type {
@@ -494,9 +496,9 @@ Okay now, let's continue :).
         case .none:
             badgeNode = nil
     }
-    
+
     badgeNode?.style.preferredSize = CGSize(width: 16, height: 16)
-    
+
     nameNode.attributedText = NSAttributedString(
         string: shop.name,
         attributes: [
@@ -516,7 +518,7 @@ Okay now, let's continue :).
         children: [badgeNode, nameNode]
     )
     ```
-    
+
     Oh no, there is an error! The reason is that `children` expects `[ASLayoutElement]` not `[ASLayoutElement?]`. What do we do? We may define a `children` property before adding it into the stack.
     ```swift
     let children: [ASLayoutElement]
@@ -525,7 +527,7 @@ Okay now, let's continue :).
     } else {
         children = [nameNode]
     }
-    
+
     return ASStackLayoutSpec(
         direction: .horizontal,
         spacing: 4,
@@ -545,7 +547,7 @@ Okay now, let's continue :).
         children: [badgeNode, nameNode].compactMap { $0 }
     )
     ```
-    
+
     Basically, `compactMap` filters all nil values out of a collection.
 
 5. Add this node into `Start/Components/ProductCardDescriptionNode.swift`
@@ -583,20 +585,20 @@ One thing you might notice about this row is that the stars are stacked horizont
     let starNodes: [ASImageNode]
     let reviewCountNode = ASTextNode()
     ```
-    
+
 3. Setup the nodes
     ```swift
     var tempStarNodes = [ASImageNode]()
-    
+
     for index in 1...5 {
         let starNode = ASImageNode()
         starNode.image = UIImage(named: index >= review.rating ? "active_star" : "inactive_star")
         starNode.style.preferredSize = CGSize(width: 11, height: 11)
         tempStarNodes.append(starNode)
     }
-    
+
     starNodes = tempStarNodes
-    
+
     reviewCountNode.attributedText = NSAttributedString(
         string: "(\(review.reviewCount))",
         attributes: [
@@ -605,7 +607,7 @@ One thing you might notice about this row is that the stars are stacked horizont
         ]
     )
     ```
-    
+
 4. Arrange it in `LayoutSpecThatFits`
     ```swift
     let starStack = ASStackLayoutSpec(
@@ -615,7 +617,7 @@ One thing you might notice about this row is that the stars are stacked horizont
         alignItems: .start,
         children: starNodes
     )
-    
+
     let mainStack = ASStackLayoutSpec(
         direction: .horizontal,
         spacing: 2,
@@ -623,10 +625,10 @@ One thing you might notice about this row is that the stars are stacked horizont
         alignItems: .center,
         children: [starStack, reviewCountNode]
     )
-    
+
     return mainStack
     ```
-    
+
 5. Add this node into `Start/Components/ProductCardDescriptionNode.swift`
     ```swift
     let reviewNode: ProductCardReviewNode
@@ -679,19 +681,19 @@ This row is optional, as free shipping badge may only be shown if `isFreeShippin
         ].compactMap { $0 }
     )
     ```
-    
+
 2. Run the project and see the result
 
 3. What if we want to add more spacing between reviewNode and freeShippingNode?
     ```swift
     freeShippingNode?.style.spacingBefore = 4 // there is also spacing after if you need it
     ```
-    
+
 #### F. Add Wishlist
 
 in this part, we will refactor the ImageNode to Class `ProductCardImageNode`, and we will attach a wishlist in the top corner(inside) of the image
 
-1. Open `ProductCardNode`. 
+1. Open `ProductCardNode`.
 
 2. Move `imageNode` into `ProductCardImageNode`.
  ```swift
@@ -702,22 +704,22 @@ in this part, we will refactor the ImageNode to Class `ProductCardImageNode`, an
   imageNode.style.preferredSize = CGSize(width: 80, height: 80)
   imageNode.cornerRadius = 6
   ```
-  
+
 3. Add `ProductCardWishlistNode`
     ```swift
     let wishlistNode = ProductCardWishlistNode()
     ```
-  
+
 4. Create layout for `ProductCardImageNode`
  ```swift
  let wishlistInset = ASInsetLayoutSpec(
    insets: UIEdgeInsets(top: 4, left: 4, bottom: .infinity, right: .infinity),
    child: wishlistNode
  )
-  
+
  return ASOverlayLayoutSpec(child: imageNode, overlay: wishlistInset)
   ```
-  
+
 5. Add `ProductCardImageNode` into `ProductCardNode`
     ```swift
     let imageNode: ProductCardImageNode
@@ -737,10 +739,10 @@ in this part, we will refactor the ImageNode to Class `ProductCardImageNode`, an
         ]
     )
     ```
-    
+
 6. Run the project and see the result
-    
-     
+
+
 #### G. Summary
 
 Well, there you go. Easy, isn't it? In a nutshell, there are three steps to create a component using `Texture`:
@@ -752,13 +754,13 @@ Now let's move on to the next step: `Creating a List of Product Card.`
 
 #### H. Move ProductCard to Lists
 In this part, we will show how to create lists using a Table node with auto height.
-  
-Next, we will create a `List of Product Card` using `TableNode.` 
+
+Next, we will create a `List of Product Card` using `TableNode.`
 
 1. Change `ProductCardNode` subclass to `ASCellNode`
 2. Open `ProductCardStarterViewController`
 3. Change the `ASDKViewController<ASDisplayNode>` generic to `ASDKViewController<ASTableNode>` and `super.init` to confirm with `ASTableNode`
-3. For use `TableNode` we need `data source` to give information what data we will render 
+3. For use `TableNode` we need `data source` to give information what data we will render
  ```swift
   node.dataSource = self
   ```
@@ -770,7 +772,7 @@ Next, we will create a `List of Product Card` using `TableNode.`
    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
     return model.count
    }
-   
+
    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
     let data = model[indexPath.row]
     return ProductCardFinalNode(model: data)
@@ -778,8 +780,8 @@ Next, we will create a `List of Product Card` using `TableNode.`
   }
   ```
 4. Build and run the app now our `ProductCardList` seems good with different detail of height
- but we still find a separtor now we will delete it to delete it we need implement method 
- `viewDidLoad` because we will acess the `tableNode.view` 
+ but we still find a separtor now we will delete it to delete it we need implement method
+ `viewDidLoad` because we will acess the `tableNode.view`
  ```swift
   override func viewDidLoad() {
    super.viewDidLoad()
@@ -803,8 +805,8 @@ In this part, we will perform a live update component on wishlist refer to produ
   ```
 4. Move to function `changeWishlistState` add toogle on and toogle off for wishlist
  ```swift
-  @objc func changeWishlistState() { 
-   // change the state vice versa 
+  @objc func changeWishlistState() {
+   // change the state vice versa
    isWishlist = !isWishlist
    setNeedsLayout()
   }
@@ -813,21 +815,21 @@ In this part, we will perform a live update component on wishlist refer to produ
 5. Move to `layoutSpecThatFits` this function will return an active node because we want to toggle on/off the wishlist so that we will add.
  ```swift
   var child: ASImageNode
-  
+
   if isWishlist {
    child = activeNode
   } else {
    child = inactiveNode
   }
-  
+
   let wishlistInset = ASInsetLayoutSpec(
    insets: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2),
    child: child
   )
   ```
-6. Build and run 
+6. Build and run
 
-In this part, you can see that our `lists of product cards` are working fine. You can `toggle the wishlist,` but we have an inset issue from our product cards, so the challenge is to fixing the card inset. 
+In this part, you can see that our `lists of product cards` are working fine. You can `toggle the wishlist,` but we have an inset issue from our product cards, so the challenge is to fixing the card inset.
 - Clue: background and insets
 - Cheat: you can checkout branch `BeautyProductCard`.
 
@@ -864,7 +866,7 @@ In this file, we already implement the code for us. We see that we have `Constra
 
 #### 4. Managing Shop Badge Image
 
-In the current implementation, to change the `Shop Badge` image, we can change the `shopBadgeImage.image` property to the preferred image. But for managing the hidden state, we still only change the `shopBadgeImage.isHidden` property. If you run this code, this implementation only hiding the view itself and leaving blank space on it. 
+In the current implementation, to change the `Shop Badge` image, we can change the `shopBadgeImage.image` property to the preferred image. But for managing the hidden state, we still only change the `shopBadgeImage.isHidden` property. If you run this code, this implementation only hiding the view itself and leaving blank space on it.
 
 ![Shop Badge Issue](https://i.postimg.cc/j26zvXyF/shop-badge.png)
 
@@ -883,7 +885,7 @@ By this implementation, the sizing can be wrong, which can be caused by human er
 
 If we see the `Managing Shop Badge Image` implementation, the implementation looks simple. But it can be otherwise if we need to handle multiple `Views'` state.
 
-We have already run the previous implementation. If we look at the screen, we can see there's blank space too while hiding the `Rating` and `Bebas Ongkir` view. 
+We have already run the previous implementation. If we look at the screen, we can see there's blank space too while hiding the `Rating` and `Bebas Ongkir` view.
 
 ![Rating and Free Shipping Issue](https://i.postimg.cc/ry5C887N/rating-freeshipping.png)
 
@@ -902,7 +904,7 @@ Imagine if we had many `View components` that need to be dynamically shown based
 
 In some years ago, Apple introduced `UIStackView` that we can use to easily manage the `View components` state. If we hide a `view` in the stack, `UIStackView` will automatically manage for removing blank space of that `view`.
 
-But in some conditions, it can be painful to control `UIStackView` if we had deep-nested `UIStackView` and some `child-view` have a different size than the other. Also for spacing between each element, it should be of the same size. For handling that, usually we need to use dummy `UIView` that acts as `spacer`. 
+But in some conditions, it can be painful to control `UIStackView` if we had deep-nested `UIStackView` and some `child-view` have a different size than the other. Also for spacing between each element, it should be of the same size. For handling that, usually we need to use dummy `UIView` that acts as `spacer`.
 
 
 ## Performance
@@ -928,7 +930,7 @@ https://bit.ly/twOct2020Supplementary
 
 # Session 5 - Future
 So far we talk about past and present, and now this time we will talk about future.
-We've talk about the advantages of using Texture, and what make we more confident to use Texture is by looking at some big companies like Pinterest and Telegram are using Texture in their iOS apps. 
+We've talk about the advantages of using Texture, and what make we more confident to use Texture is by looking at some big companies like Pinterest and Telegram are using Texture in their iOS apps.
 
 All of our workshop session show lot of benefit of using Texture, but if you check at the syntax of Texture, it still have lot of code and not "declarative" like SwiftUI. For SwiftUI, we can't used it yet on our main app because we still need to support iOS < 13, and SwiftUI is "a bit" buggy on iOS 13 as well. This is how our Texture layout code looks like:
 
@@ -973,7 +975,7 @@ LayoutSpec {
 }
 ```
 
-And by the way, if you follow the Tokopedia iOS hotest news in early October, we've launch our first Widget! Built exclusively using SwiftUI. and our devs said that learning Texture make it easier for them to learn SwiftUI! 
+And by the way, if you follow the Tokopedia iOS hotest news in early October, we've launch our first Widget! Built exclusively using SwiftUI. and our devs said that learning Texture make it easier for them to learn SwiftUI!
 
 ![Tokopedia Widget](https://cdn.dribbble.com/users/2305495/screenshots/14396292/media/7f520c20f6228b839a717edb008c4acd.jpg)
 
