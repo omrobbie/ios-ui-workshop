@@ -142,8 +142,6 @@ extension InteractiveListVC: UITableViewDelegate {
         case .exercise3:
             let viewController = LayoutExercise3VC()
             navigationController?.pushViewController(viewController, animated: true)
-        default:
-            break
         }
     }
 }
